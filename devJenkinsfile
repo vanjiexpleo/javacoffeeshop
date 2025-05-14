@@ -1,0 +1,31 @@
+@Library('shared-lib@main') _
+
+pipeline {
+    agent any
+
+    parameters {
+        string(name: 'IMAGE_NAME', defaultValue: 'javacoffeeshop', description: 'Docker image name')
+    }
+
+    environment {
+        IMAGE_TAG = "${BUILD_NUMBER}"
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                script {
+                    simplePipeline.checkoutCode()
+                }
+            }
+        }
+
+        stage('Build Image') {
+            steps {
+                script {
+                    simplePipeline.buildImage(params.IMAGE_NAME, env.IMAGE_TAG)
+                }
+            }
+        }
+    }
+}
