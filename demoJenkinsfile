@@ -1,0 +1,18 @@
+pipeline {
+    agent any
+
+    parameters {
+        string(name: 'NAME', defaultValue: 'World', description: 'Enter a name')
+        choice(name: 'GREETING', choices: ['Hello', 'Hi', 'Hey'], description: 'Select a greeting')
+    }
+
+    stages {
+        stage('Hello') {
+            steps {
+                script {
+                    echo "${params.GREETING}, ${params.NAME}!"
+                }
+            }
+        }
+    }
+}
