@@ -15,7 +15,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 script {
-                    simplePipeline.checkoutCode()
+                    Sharedlib.checkoutCode()
                 }
             }
         }
@@ -23,7 +23,7 @@ pipeline {
         stage('Build Image') {
             steps {
                 script {
-                    simplePipeline.buildImage(params.IMAGE_NAME, env.IMAGE_TAG)
+                    Sharedlib.buildImage(params.IMAGE_NAME, env.IMAGE_TAG)
                 }
             }
         }
